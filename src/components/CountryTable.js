@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles , withStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import FlagModal from "./countryModal";
+import FlagModal from "./CountryModal";
 import Button from "@material-ui/core/Button";
 import Tooltip from '@material-ui/core/Tooltip';
 
