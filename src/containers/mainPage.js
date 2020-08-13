@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles} from "@material-ui/core/styles";
-import FlagAppBar from "../components/mainHeader";
-import SearchBar from "../components/searchBar";
+import FlagAppBar from "../components/MainHeader";
+import SearchBar from "../components/SearchBar";
 import FlagTable from "../components/CountryTable";
 import Container from "@material-ui/core/Container";
-import client from "../api/client";
-import CircleLoadAnimation from "../components/loadingCircle";
+import client from "../api/Client";
+import CircleLoadAnimation from "../components/LoadingCircle";
 
 const useStyles = makeStyles({
   root: {

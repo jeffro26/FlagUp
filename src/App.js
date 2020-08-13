@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import mainPage from "./containers/mainPage";
+import mainPage from "./containers/MainPage";
 
 function App() {
   return (
