@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Input from "@material-ui/core/Input";
 import Divider from "@material-ui/core/Divider";
@@ -8,6 +8,15 @@ import SearchIcon from "@material-ui/icons/Search";
 import BackspaceIcon from "@material-ui/icons/Backspace";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import Tooltip from '@material-ui/core/Tooltip';
+
+const ButtonTooltip = withStyles({
+  tooltip: {
+    color: "black",
+    backgroundColor: "white",
+    fontSize: 21
+  }
+})(Tooltip);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,6 +86,7 @@ export default function SearchBar(props) {
           onChange={onChangeText}
         />
       </FormControl>
+      <ButtonTooltip title={"Search"} arrow>
       <IconButton
         className={classes.iconButton}
         aria-label="search"
@@ -84,7 +94,9 @@ export default function SearchBar(props) {
       >
         <SearchIcon />
       </IconButton>
+      </ButtonTooltip>
       <Divider className={classes.divider} orientation="vertical" />
+      <ButtonTooltip title={"Clear Search"} arrow>
       <IconButton
         color="primary"
         className={classes.iconButton}
@@ -93,6 +105,7 @@ export default function SearchBar(props) {
       >
         <BackspaceIcon />
       </IconButton>
+      </ButtonTooltip>
     </Paper>
   );
 }
