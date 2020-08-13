@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
+import Input from "@material-ui/core/Input";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import BackspaceIcon from "@material-ui/icons/Backspace";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: "2px 4px",
     display: "flex",
-    alignItems: "center",
-    width: 400
+    alignItems: "center"
   },
   input: {
     marginLeft: theme.spacing(1),
-    flex: 1
+    flex: 1,
+    fullWidth: true
   },
   iconButton: {
     padding: 10
@@ -29,19 +31,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchBar(props) {
   const { flags, setSearchedFlags, setSearchTag } = props;
-  const [searchText, setSearchText] = useState("Please input a country name");
+  const [searchValue, setSearchValue] = useState("");
   const classes = useStyles();
 
   const onChangeText = evt => {
-    setSearchText(evt.target.value);
+    setSearchValue(evt.target.value);
   };
 
   const onSubmitText = evt => {
-    searchForFlag(searchText);
+    searchForFlag(searchValue);
   };
 
   const onCancelSearch = evt => {
-    setSearchText("Please input a country name");
+    setSearchValue("");
     setSearchTag(false);
   };
 
@@ -55,21 +57,26 @@ export default function SearchBar(props) {
         flagSearchArray.push(flag);
       }
     });
-    if (flagSearchArray) {
+    console.log(key);
+    if (flagSearchArray.length === 0) {
+      window.alert("Unable to find any Country with those parameters");
+    } else {
       setSearchedFlags(flagSearchArray);
       setSearchTag(true);
-    } else {
-      window.alert("Unable to find Country");
     }
   };
   return (
     <Paper component="form" className={classes.root}>
-      <InputBase
-        className={classes.input}
-        placeholder={searchText}
-        inputProps={{ "aria-label": "Search for a country" }}
-        onChange={onChangeText}
-      />
+      <FormControl fullWidth className={classes.margin}>
+        <InputLabel htmlFor="standard-country-search">Search</InputLabel>
+        <Input
+          className={classes.input}
+          placeholder={"Please type in a country and press the search button"}
+          value={searchValue}
+          inputProps={{ "aria-label": "Search for a country" }}
+          onChange={onChangeText}
+        />
+      </FormControl>
       <IconButton
         className={classes.iconButton}
         aria-label="search"
@@ -77,11 +84,7 @@ export default function SearchBar(props) {
       >
         <SearchIcon />
       </IconButton>
-      <Divider
-        className={classes.divider}
-        orientation="vertical"
-        
-      />
+      <Divider className={classes.divider} orientation="vertical" />
       <IconButton
         color="primary"
         className={classes.iconButton}
