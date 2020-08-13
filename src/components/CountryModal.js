@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -11,6 +11,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import IconButton from "@material-ui/core/IconButton";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
   name: {
@@ -46,6 +47,14 @@ const useStyles = makeStyles(theme => ({
     left: '3%'
   },
 }));
+
+const BackTooltip = withStyles({
+  tooltip: {
+    color: "black",
+    backgroundColor: "white",
+    fontSize: 21
+  }
+})(Tooltip);
 
 export default function FlagModal(props) {
   const { flag, handleCloseModal } = props;
@@ -108,7 +117,7 @@ export default function FlagModal(props) {
   );
 
   const flagInfoRender = () => (
-    <div>
+    <div className={classes.root}>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -129,14 +138,17 @@ export default function FlagModal(props) {
                   <h1>Country Information</h1>
                 </Grid>
                 <Grid item xs={1}>
+                <BackTooltip title="Back" arrow>
                   <IconButton
                     color="primary"
                     aria-label="directions"
                     onClick={onClose}
                     className={classes.backButton}
                   >
+                      
                     <ExitToAppIcon />
                   </IconButton>
+                  </BackTooltip>
                 </Grid>
               </Grid>
               <Grid container direction="row">

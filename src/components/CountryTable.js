@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles , withStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import FlagModal from "../components/flagModal";
+import FlagModal from "./CountryModal";
 import Button from "@material-ui/core/Button";
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const useStyles = makeStyles({
@@ -26,8 +27,16 @@ const useStyles = makeStyles({
     boxSizing: "border-box",
     borderBottom: "5px solid",
     padding: "10px"
-  }
+  },
 });
+
+const CountryTooltip = withStyles({
+  tooltip: {
+    color: "black",
+    backgroundColor: "white",
+    fontSize: 21
+  }
+})(Tooltip);
 
 export default function FlagTable(props) {
   const classes = useStyles();
@@ -50,6 +59,7 @@ export default function FlagTable(props) {
     <div className={classes.root}>
       <Grid container direction="row" alignItems="center">
         {flags.map(flag => (
+          <CountryTooltip title={flag.name} key={flag.name} arrow>
           <Button  key={flag.name} align="center" xs={3} spacing={3}>
             <img
               src={flag.flag}
@@ -58,6 +68,7 @@ export default function FlagTable(props) {
               onClick={() => onFlagClick(flag)}
             />
           </Button>
+          </CountryTooltip>
         ))}
       </Grid>
       <FlagModal

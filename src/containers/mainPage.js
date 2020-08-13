@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles} from "@material-ui/core/styles";
 import FlagAppBar from "../components/mainHeader";
 import SearchBar from "../components/searchBar";
-import FlagTable from "../components/flagTable";
+import FlagTable from "../components/CountryTable";
 import Container from "@material-ui/core/Container";
 import client from "../api/client";
 import CircleLoadAnimation from "../components/loadingCircle";
 
+const useStyles = makeStyles({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    backgroundColor: "white"
+  }
+});
+
 export default function MainPage() {
+  const classes = useStyles();
   const [stage, setStage] = useState("loading");
   const [flags, setFlags] = useState([]);
   const [searchTag, setSearchTag] = useState(false);
@@ -37,7 +49,7 @@ export default function MainPage() {
   }
 
   const renderReady = () => (
-    <div>
+    <div className={classes.root}>
       <Container component="main">
         <FlagAppBar />
         <SearchBar
@@ -52,7 +64,7 @@ export default function MainPage() {
   );
 
   const renderLoading = () => (
-    <div>
+    <div className={classes.root}>
       <Container component="main">
         <FlagAppBar />
         <SearchBar
