@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles} from "@material-ui/core/styles";
 import FlagAppBar from "../components/mainHeader";
 import SearchBar from "../components/searchBar";
-import FlagTable from "../components/CountryTable";
+import FlagTable from "../components/countryTable";
 import Container from "@material-ui/core/Container";
 import client from "../api/client";
 import CircleLoadAnimation from "../components/loadingCircle";
