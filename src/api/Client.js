@@ -19,16 +19,6 @@ export class Client {
     const http = axios.create(this.config);
     return http;
   }
-
-  async _post(url, data = {}) {
-    try {
-      const response = await this.http.post(url);
-      return response.data;
-    } catch (err) {
-      window.alert(err);
-      throw err;
-    }
-  }
   async _get(url, data = {}) {
     try {
       const response = await this.http.get(url);
