@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 export default function SearchBar(props) {
   const { flags, setSearchedFlags, setSearchTag } = props;
   const [searchValue, setSearchValue] = useState("");
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   const onChangeText = evt => {
     setSearchValue(evt.target.value);
@@ -56,6 +56,7 @@ export default function SearchBar(props) {
     setSearchTag(false);
   };
 
+
   const searchForFlag = key => {
     const searchKey = key.toLowerCase();
 
@@ -66,7 +67,6 @@ export default function SearchBar(props) {
         flagSearchArray.push(flag);
       }
     });
-    console.log(key);
     if (flagSearchArray.length === 0) {
       window.alert("Unable to find any Country with those parameters");
     } else {

@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    backgroundColor: "white"
+    backgroundColor: props => (props.appTheme === "LT" ? "white" : "#212121")
   },
   grid: {
     width: 300,
@@ -39,7 +39,7 @@ const CountryTooltip = withStyles({
 })(Tooltip);
 
 export default function FlagTable(props) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const [modalOpen, setModalOpen] = useState(false);
   const [flag, setFlag] = useState();
   
@@ -75,6 +75,7 @@ export default function FlagTable(props) {
         modalOpen={modalOpen}
         handleCloseModal={handleCloseModal}
         flag={flag}
+        {...props}
       />
     </div>
   );

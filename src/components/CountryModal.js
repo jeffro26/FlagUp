@@ -17,7 +17,11 @@ const useStyles = makeStyles(theme => ({
   name: {
     fontWeight: "bold",
     width: "60%",
-    height: "20px"
+    height: "20px",
+    color: props => (props.appTheme === "LT" ? "black" : "white"),
+  },dropdown: {
+    fontWeight: "bold",
+    color: props => (props.appTheme === "LT" ? "black" : "white")
   },
   formControl: {
     margin: theme.spacing(2),
@@ -29,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   paper_modal: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: props => (props.appTheme === "LT" ? "white" : "#212121"),
     border: "2px solid #000",
     padding: theme.spacing(2, 3)
   },
@@ -58,7 +62,7 @@ const BackTooltip = withStyles({
 
 export default function FlagModal(props) {
   const { flag, handleCloseModal } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
   const [currencyState, setCurrencyState] = useState(0);
   const [languageState, setLanguageState] = useState(0);
 
@@ -79,12 +83,13 @@ export default function FlagModal(props) {
   const CurrencyDropdown = () => (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-currency-input-label">Currencies</InputLabel>
+        <InputLabel id="demo-currency-input-label"className={classes.dropdown} >Currencies</InputLabel>
         <Select
           labelId="demo-currency-dropdown-label"
           id="demo-currency-dropdown-select"
           value={currencyState}
           onChange={handleCurrencyChange}
+          className={classes.dropdown}
         >
           {flag.currencies.map((currency, index) => (
             <MenuItem key={index} value={index}>
@@ -99,12 +104,13 @@ export default function FlagModal(props) {
   const LanguageDropdown = () => (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-language-input-label">Languagies</InputLabel>
+        <InputLabel id="demo-language-input-label" className={classes.dropdown}>Languagies</InputLabel>
         <Select
           labelId="demo-language-dropdown-label"
           id="demo-language-dropdown-select"
           value={languageState}
           onChange={handleLanguageChange}
+          className={classes.dropdown}
         >
           {flag.languages.map((language, index) => (
             <MenuItem key={index} value={index}>
@@ -135,7 +141,7 @@ export default function FlagModal(props) {
             <Box classes={{ root: classes.expansionSummary }}>
               <Grid container direction="row">
               <Grid item xs={11}>
-                  <h1>Country Information</h1>
+                  <h1 className={classes.name}>Country Information</h1>
                 </Grid>
                 <Grid item xs={1}>
                 <BackTooltip title="Back" arrow>
@@ -165,16 +171,19 @@ export default function FlagModal(props) {
                     </ListItem>
                     <ListItem>
                       <ListItemText
+                      classes={{ root: classes.name }}
                         primary={`Capital of Country: ${flag.capital}`}
                       />
                     </ListItem>
                     <ListItem>
                       <ListItemText
+                      classes={{ root: classes.name }}
                         primary={`Population of Country: ${flag.population}`}
                       />
                     </ListItem>
                     <ListItem>
                       <ListItemText
+                      classes={{ root: classes.name }}
                         primary={`ISO Code of Country: ${flag.alpha3Code}`}
                       />
                     </ListItem>
