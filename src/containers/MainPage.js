@@ -59,7 +59,6 @@ export default function MainPage() {
         />
         <FlagTable flags={flagsChooser()} />
       </Container>
-      );
     </div>
   );
 
@@ -74,7 +73,6 @@ export default function MainPage() {
         />
         <CircleLoadAnimation />
       </Container>
-      );
     </div>
   );
 
